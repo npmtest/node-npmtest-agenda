@@ -1,0 +1,1030 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-agenda/agenda/lib/job.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-agenda">npmtest-agenda (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-agenda/agenda/lib/job.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">14.09% <small>(21 / 149)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 74)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 25)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">14.38% <small>(21 / 146)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> » <a href="index.html">node-npmtest-agenda/agenda/lib/</a> » job.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/** @package
+&nbsp;
+    job.js
+&nbsp;
+    21/04/2015 NF   Removed database code. ie. From Job.remove()
+&nbsp;
+  Last change: NF 21/04/2015 1:20:47 PM
+*/
+&nbsp;
+var humanInterval = require('human-interval'),
+    CronTime = require('cron').CronTime,
+    date = require('date.js'),
+    moment = require('moment-timezone');
+&nbsp;
+var Job = module.exports = <span class="fstat-no" title="function not covered">function Job(args) {</span>
+<span class="cstat-no" title="statement not covered">  args = args || {};</span>
+&nbsp;
+  // Remove special args
+<span class="cstat-no" title="statement not covered">  this.agenda = args.agenda;</span>
+<span class="cstat-no" title="statement not covered">  delete args.agenda;</span>
+&nbsp;
+  // Process args
+<span class="cstat-no" title="statement not covered">  args.priority = parsePriority(args.priority) || 0;</span>
+&nbsp;
+  // Set attrs to args
+<span class="cstat-no" title="statement not covered">  var attrs = {};</span>
+<span class="cstat-no" title="statement not covered">  for (var key in args) {</span>
+<span class="cstat-no" title="statement not covered">    if (args.hasOwnProperty(key)) {</span>
+<span class="cstat-no" title="statement not covered">      attrs[key] = args[key];</span>
+    }
+  }
+&nbsp;
+  // Set defaults if undefined
+<span class="cstat-no" title="statement not covered">  attrs.nextRunAt = attrs.nextRunAt || new Date();</span>
+<span class="cstat-no" title="statement not covered">  attrs.type = attrs.type || 'once';</span>
+<span class="cstat-no" title="statement not covered">  this.attrs = attrs;</span>
+};
+&nbsp;
+Job.prototype.toJSON = <span class="fstat-no" title="function not covered">function() {</span> // create a persistable Mongo object -RR
+<span class="cstat-no" title="statement not covered">    var self = this,</span>
+        attrs = self.attrs || {};
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var result = {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    for (var prop in attrs) {</span>
+<span class="cstat-no" title="statement not covered">      if (attrs.hasOwnProperty(prop)) {</span>
+<span class="cstat-no" title="statement not covered">        result[prop] = attrs[prop];</span>
+      }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var dates = ['lastRunAt', 'lastFinishedAt', 'nextRunAt', 'failedAt', 'lockedAt'];</span>
+<span class="cstat-no" title="statement not covered">    dates.forEach(<span class="fstat-no" title="function not covered">function(d) {</span></span>
+<span class="cstat-no" title="statement not covered">      if (result[d]) {</span>
+<span class="cstat-no" title="statement not covered">        result[d] = new Date(result[d]);</span>
+      }
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return result;</span>
+};
+&nbsp;
+Job.prototype.computeNextRunAt = <span class="fstat-no" title="function not covered">function() {</span>
+<span class="cstat-no" title="statement not covered">  var interval = this.attrs.repeatInterval;</span>
+<span class="cstat-no" title="statement not covered">  var timezone = this.attrs.repeatTimezone;</span>
+<span class="cstat-no" title="statement not covered">  var repeatAt = this.attrs.repeatAt;</span>
+<span class="cstat-no" title="statement not covered">  this.attrs.nextRunAt = undefined;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (interval) {</span>
+<span class="cstat-no" title="statement not covered">    computeFromInterval.call(this);</span>
+  } else <span class="cstat-no" title="statement not covered">if (repeatAt) {</span>
+<span class="cstat-no" title="statement not covered">    computeFromRepeatAt.call(this);</span>
+  }
+<span class="cstat-no" title="statement not covered">  return this;</span>
+&nbsp;
+<span class="fstat-no" title="function not covered">  function dateForTimezone (d) {</span>
+<span class="cstat-no" title="statement not covered">    d = moment(d);</span>
+<span class="cstat-no" title="statement not covered">    if(timezone) <span class="cstat-no" title="statement not covered">d.tz(timezone);</span></span>
+<span class="cstat-no" title="statement not covered">    return d;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered">  function computeFromInterval() {</span>
+<span class="cstat-no" title="statement not covered">    var lastRun = this.attrs.lastRunAt || new Date();</span>
+<span class="cstat-no" title="statement not covered">    lastRun = dateForTimezone(lastRun);</span>
+<span class="cstat-no" title="statement not covered">    try {</span>
+<span class="cstat-no" title="statement not covered">      var cronTime = new CronTime(interval);</span>
+<span class="cstat-no" title="statement not covered">      var nextDate = cronTime._getNextDateFrom(lastRun);</span>
+<span class="cstat-no" title="statement not covered">      if (nextDate.valueOf() == lastRun.valueOf()) {</span>
+        // Handle cronTime giving back the same date for the next run time
+<span class="cstat-no" title="statement not covered">        nextDate = cronTime._getNextDateFrom(dateForTimezone(new Date(lastRun.valueOf() + 1000)));</span>
+      }
+<span class="cstat-no" title="statement not covered">      this.attrs.nextRunAt = nextDate;</span>
+    } catch (e) {
+      // Nope, humanInterval then!
+<span class="cstat-no" title="statement not covered">      try {</span>
+<span class="cstat-no" title="statement not covered">        if (!this.attrs.lastRunAt &amp;&amp; humanInterval(interval)) {</span>
+<span class="cstat-no" title="statement not covered">          this.attrs.nextRunAt = lastRun.valueOf();</span>
+        } else {
+<span class="cstat-no" title="statement not covered">          this.attrs.nextRunAt = lastRun.valueOf() + humanInterval(interval);</span>
+        }
+      } catch (e) {}
+    } finally {
+<span class="cstat-no" title="statement not covered">      if (isNaN(this.attrs.nextRunAt)) {</span>
+<span class="cstat-no" title="statement not covered">        this.attrs.nextRunAt = undefined;</span>
+<span class="cstat-no" title="statement not covered">        this.fail('failed to calculate nextRunAt due to invalid repeat interval');</span>
+      }
+    }
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered">  function computeFromRepeatAt() {</span>
+<span class="cstat-no" title="statement not covered">    var lastRun = this.attrs.lastRunAt || new Date();</span>
+<span class="cstat-no" title="statement not covered">    var nextDate = date(repeatAt).valueOf();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var offset = Date.now(); </span> // if you do not specify offset date for below test it will fail for ms
+<span class="cstat-no" title="statement not covered">    if (offset === date(repeatAt,offset).valueOf()) {</span>
+<span class="cstat-no" title="statement not covered">      this.attrs.nextRunAt = undefined;</span>
+<span class="cstat-no" title="statement not covered">      this.fail('failed to calculate repeatAt time due to invalid format');</span>
+    } else <span class="cstat-no" title="statement not covered">if (nextDate.valueOf() == lastRun.valueOf()) {</span>
+<span class="cstat-no" title="statement not covered">      this.attrs.nextRunAt = date('tomorrow at ', repeatAt);</span>
+    } else {
+<span class="cstat-no" title="statement not covered">      this.attrs.nextRunAt = date(repeatAt);</span>
+    }
+  }
+};
+&nbsp;
+Job.prototype.repeatEvery = <span class="fstat-no" title="function not covered">function(interval, options) {</span>
+<span class="cstat-no" title="statement not covered">  options = options || {};</span>
+<span class="cstat-no" title="statement not covered">  this.attrs.repeatInterval = interval;</span>
+<span class="cstat-no" title="statement not covered">  this.attrs.repeatTimezone = options.timezone ? options.timezone : null;</span>
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+Job.prototype.repeatAt = <span class="fstat-no" title="function not covered">function(time) {</span>
+<span class="cstat-no" title="statement not covered">  this.attrs.repeatAt = time;</span>
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+Job.prototype.disable = <span class="fstat-no" title="function not covered">function() {</span>
+<span class="cstat-no" title="statement not covered">  this.attrs.disabled = true;</span>
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+Job.prototype.enable = <span class="fstat-no" title="function not covered">function() {</span>
+<span class="cstat-no" title="statement not covered">  this.attrs.disabled = false;</span>
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+Job.prototype.unique = <span class="fstat-no" title="function not covered">function(unique, opts) {</span>
+<span class="cstat-no" title="statement not covered">  this.attrs.unique = unique;</span>
+<span class="cstat-no" title="statement not covered">  this.attrs.uniqueOpts = opts;</span>
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+Job.prototype.schedule = <span class="fstat-no" title="function not covered">function(time) {</span>
+<span class="cstat-no" title="statement not covered">  this._scheduled = true;</span>
+<span class="cstat-no" title="statement not covered">  this.attrs.nextRunAt = (time instanceof Date) ? time : date(time);</span>
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+Job.prototype.priority = <span class="fstat-no" title="function not covered">function(priority) {</span>
+<span class="cstat-no" title="statement not covered">  this.attrs.priority = parsePriority(priority);</span>
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+Job.prototype.fail = <span class="fstat-no" title="function not covered">function(reason) {</span>
+<span class="cstat-no" title="statement not covered">  if(reason instanceof Error) {</span>
+<span class="cstat-no" title="statement not covered">    reason = reason.message;</span>
+  }
+<span class="cstat-no" title="statement not covered">  this.attrs.failReason = reason;</span>
+<span class="cstat-no" title="statement not covered">  this.attrs.failCount = (this.attrs.failCount || 0) + 1;</span>
+<span class="cstat-no" title="statement not covered">  this.attrs.failedAt = new Date();</span>
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+Job.prototype.run = <span class="fstat-no" title="function not covered">function(cb) {</span>
+<span class="cstat-no" title="statement not covered">  var self = this,</span>
+      agenda = self.agenda,
+      definition = agenda._definitions[self.attrs.name];
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var setImmediate = setImmediate || process.nextTick;</span>
+<span class="cstat-no" title="statement not covered">  setImmediate(<span class="fstat-no" title="function not covered">function() {</span></span>
+<span class="cstat-no" title="statement not covered">    self.attrs.lastRunAt = new Date();</span>
+<span class="cstat-no" title="statement not covered">    self.computeNextRunAt();</span>
+<span class="cstat-no" title="statement not covered">    self.save(<span class="fstat-no" title="function not covered">function() {</span></span>
+<span class="cstat-no" title="statement not covered">      var jobCallback = <span class="fstat-no" title="function not covered">function(err) {</span></span>
+<span class="cstat-no" title="statement not covered">        if (err) {</span>
+<span class="cstat-no" title="statement not covered">          self.fail(err);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered">        self.attrs.lastFinishedAt = new Date();</span>
+<span class="cstat-no" title="statement not covered">        self.attrs.lockedAt = null;</span>
+<span class="cstat-no" title="statement not covered">        self.save(<span class="fstat-no" title="function not covered">function(saveErr, job) {</span></span>
+<span class="cstat-no" title="statement not covered">          cb &amp;&amp; cb(err || saveErr, job);</span>
+<span class="cstat-no" title="statement not covered">          if (err) {</span>
+<span class="cstat-no" title="statement not covered">            agenda.emit('fail', err, self);</span>
+<span class="cstat-no" title="statement not covered">            agenda.emit('fail:' + self.attrs.name, err, self);</span>
+          } else {
+<span class="cstat-no" title="statement not covered">            agenda.emit('success', self);</span>
+<span class="cstat-no" title="statement not covered">            agenda.emit('success:' + self.attrs.name, self);</span>
+          }
+<span class="cstat-no" title="statement not covered">          agenda.emit('complete', self);</span>
+<span class="cstat-no" title="statement not covered">          agenda.emit('complete:' + self.attrs.name, self);</span>
+        });
+      };
+&nbsp;
+<span class="cstat-no" title="statement not covered">      try {</span>
+<span class="cstat-no" title="statement not covered">        agenda.emit('start', self);</span>
+<span class="cstat-no" title="statement not covered">        agenda.emit('start:' + self.attrs.name, self);</span>
+<span class="cstat-no" title="statement not covered">        if (!definition) {</span>
+<span class="cstat-no" title="statement not covered">          throw new Error('Undefined job');</span>
+        }
+<span class="cstat-no" title="statement not covered">        if (definition.fn.length === 2) {</span>
+<span class="cstat-no" title="statement not covered">          definition.fn(self, jobCallback);</span>
+        } else {
+<span class="cstat-no" title="statement not covered">          definition.fn(self);</span>
+<span class="cstat-no" title="statement not covered">          jobCallback();</span>
+        }
+      } catch (e) {
+<span class="cstat-no" title="statement not covered">        jobCallback(e);</span>
+      }
+    });
+  });
+};
+&nbsp;
+Job.prototype.isRunning = <span class="fstat-no" title="function not covered">function() {</span>
+<span class="cstat-no" title="statement not covered">  if (!this.attrs.lastRunAt) <span class="cstat-no" title="statement not covered">return false;</span></span>
+<span class="cstat-no" title="statement not covered">  if (!this.attrs.lastFinishedAt) <span class="cstat-no" title="statement not covered">return true;</span></span>
+<span class="cstat-no" title="statement not covered">  if (this.attrs.lockedAt &amp;&amp; this.attrs.lastRunAt.getTime() &gt; this.attrs.lastFinishedAt.getTime()) {</span>
+<span class="cstat-no" title="statement not covered">    return true;</span>
+  }
+<span class="cstat-no" title="statement not covered">  return false;</span>
+};
+&nbsp;
+Job.prototype.save = <span class="fstat-no" title="function not covered">function(cb) {</span>
+<span class="cstat-no" title="statement not covered">  this.agenda.saveJob(this, cb);</span>
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+Job.prototype.remove = <span class="fstat-no" title="function not covered">function(cb) {</span>
+  // refactored NF 21/04/2015
+<span class="cstat-no" title="statement not covered">  this.agenda.cancel( {_id: this.attrs._id}, cb );</span>
+/*
+  var self = this;
+  this.agenda._db.remove({_id: this.attrs._id}, function(err, count) {
+    if(err) {
+      return cb(err);
+    }
+    cb(err, count);
+  });
+*/
+};
+&nbsp;
+Job.prototype.touch = <span class="fstat-no" title="function not covered">function(cb) {</span>
+<span class="cstat-no" title="statement not covered">  this.attrs.lockedAt = new Date();</span>
+<span class="cstat-no" title="statement not covered">  this.save(cb);</span>
+};
+&nbsp;
+<span class="fstat-no" title="function not covered">function parsePriority(priority) {</span>
+<span class="cstat-no" title="statement not covered">  var priorityMap = {</span>
+    lowest: -20,
+    low: -10,
+    normal: 0,
+    high: 10,
+    highest: 20
+  };
+<span class="cstat-no" title="statement not covered">  if (typeof priority === 'number' || priority instanceof Number)</span>
+<span class="cstat-no" title="statement not covered">    return priority;</span>
+  else
+<span class="cstat-no" title="statement not covered">    return priorityMap[priority];</span>
+}
+&nbsp;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 08:01:55 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>

@@ -1,4 +1,7 @@
-# test coverage for  [agenda (v0.9.1)](https://github.com/rschmukler/agenda#readme)  [![npm package](https://img.shields.io/npm/v/npmtest-agenda.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-agenda) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-agenda.svg)](https://travis-ci.org/npmtest/node-npmtest-agenda)
+# npmtest-agenda
+
+#### basic test coverage for  [agenda (v0.9.1)](https://github.com/rschmukler/agenda#readme)  [![npm package](https://img.shields.io/npm/v/npmtest-agenda.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-agenda) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-agenda.svg)](https://travis-ci.org/npmtest/node-npmtest-agenda)
+
 #### Light weight job scheduler for Node.js
 
 [![NPM](https://nodei.co/npm/agenda.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/agenda)
@@ -9,9 +12,15 @@
 | test-report : | [![test-report](https://npmtest.github.io/node-npmtest-agenda/build/test-report.badge.svg)](https://npmtest.github.io/node-npmtest-agenda/build/test-report.html)|
 | build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-agenda/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-agenda/tree/gh-pages/build)|
 
+- [https://npmtest.github.io/node-npmtest-agenda/build/coverage.html/index.html](https://npmtest.github.io/node-npmtest-agenda/build/coverage.html/index.html)
+
 [![istanbul-coverage](https://npmtest.github.io/node-npmtest-agenda/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fcoverage.lib.html.png)](https://npmtest.github.io/node-npmtest-agenda/build/coverage.html/index.html)
 
+- [https://npmtest.github.io/node-npmtest-agenda/build/test-report.html](https://npmtest.github.io/node-npmtest-agenda/build/test-report.html)
+
 [![test-report](https://npmtest.github.io/node-npmtest-agenda/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Ftest-report.html.png)](https://npmtest.github.io/node-npmtest-agenda/build/test-report.html)
+
+- [https://npmdoc.github.io/node-npmdoc-agenda/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-agenda/build/apidoc.html)
 
 [![apidoc](https://npmdoc.github.io/node-npmdoc-agenda/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-agenda/build/apidoc.html)
 
@@ -80,7 +89,8 @@
     "scripts": {
         "test": "mocha"
     },
-    "version": "0.9.1"
+    "version": "0.9.1",
+    "bin": {}
 }
 ```
 
